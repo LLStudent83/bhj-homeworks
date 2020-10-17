@@ -3,12 +3,15 @@ const elModSucc = document.getElementById("modal_success");
 elModMain.classList.add("modal_active");
 const button = document.querySelector("a.modal__close");
 
-button.onclick = function () {
-  elModMain.classList.remove("modal_active");
-  elModSucc.classList.add("modal_active");
+const buttonClose = document.getElementsByClassName("modal__close");
+for (let i = 0; i < buttonClose.length; i++) {
+  buttonClose[i].onclick = function () {
+    if (buttonClose[i].classList.contains("show-success")) {
+      elModMain.classList.remove("modal_active");
+      elModSucc.classList.add("modal_active");
+    } else {
+      elModMain.classList.remove("modal_active");
+      elModSucc.classList.remove("modal_active");
+    };
+  };
 };
-const elemClose = document.getElementsByClassName("modal__close_times")[1];
-elemClose.onclick = function () {
-    elModSucc.classList.remove("modal_active");
-};
-
