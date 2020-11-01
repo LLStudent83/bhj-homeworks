@@ -1,7 +1,6 @@
 const elModMain = document.getElementById("modal_main");
 const elModSucc = document.getElementById("modal_success");
 elModMain.classList.add("modal_active");
-const button = document.querySelector("a.modal__close");
 
 const buttonClose = document.getElementsByClassName("modal__close");
 for (let i = 0; i < buttonClose.length; i++) {
