@@ -16,7 +16,7 @@ function assignСlass() {
   }
   elementsRotator[indexNext].classList.add("rotator__case_active");
   let colorEl = elementsRotator[indexNext].dataset.color;
-  elementsRotator[indexNext].setAttribute("style", `"color:" + colorEl`);
+  elementsRotator[indexNext].setAttribute("style", "color:" + colorEl);
   let time = elementsRotator[indexNext].dataset.speed;
   timeout(time);
 }

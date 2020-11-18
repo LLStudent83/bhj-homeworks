@@ -1,11 +1,11 @@
 class Autocomplete {
   constructor( container ) {
     this.container = container;
-    this.input = container.querySelector( '.autocomplete__input' );
-    this.searchInput = container.querySelector( '.autocomplete__search' );
-    this.list = container.querySelector( '.autocomplete__list' );
+    this.input = container.querySelector( '.autocomplete__input' );// Тег select
+    this.searchInput = container.querySelector( '.autocomplete__search' );//строка input
+    this.list = container.querySelector( '.autocomplete__list' );//блок выбора
     this.valueContainer = container.querySelector( '.autocomplete__value' );
-    this.valueElement = container.querySelector( '.autocomplete__text-content' );
+    this.valueElement = container.querySelector( '.autocomplete__text-content' );//строка ввода
 
     this.registerEvents();
   }
@@ -14,8 +14,8 @@ class Autocomplete {
     this.valueContainer.addEventListener( 'click', e => {
       this.searchInput.classList.add( 'autocomplete__search_active' );
       this.list.classList.add( 'autocomplete__list_active' );
-      this.searchInput.value = this.valueElement.textContent.trim();
-      this.searchInput.focus();
+      this.searchInput.value = this.valueElement.textContent.trim(); //убирает пробельные символы в начале и конце строки
+      this.searchInput.focus();//устанавливает фокус
 
       this.onSearch();
     });
@@ -25,7 +25,7 @@ class Autocomplete {
 
     this.list.addEventListener( 'click', e => {
       const { target } = e;
-      if ( !target.matches( '.autocomplete__item' )) {
+      if ( !target.matches( '.autocomplete__item' )) {//соответствует или нет элемент указанному css селектору
         return;
       }
 
@@ -66,27 +66,26 @@ class Autocomplete {
 
     this.list.innerHTML = html.join('');
   }
-
+print() {
+  console.log("print")
+}
   getMatches( text ) {
-    /*
-      TODO: этот метод нужно дописать
-      text - фраза, которую вводят в поле поиска
-      Метод должен вернуть массив.
+    let arrOption = [];
+    for(let i of this.input.options) {
+      if(i.textContent.includes(text)) {
+        arrOption.push(i);
+      }
+    }
+    
 
-      Он формируется на основе списка опций select-элемента (this.input)
-      Подходящие опции - те, чей текст содержит то, что есть в аргументе text
-      Необходимо вернуть массив объектов со свойствами:
+    return arrOption;
+    
+    /*[
       {
-        text: 'Содержимое <option>',
-        value: 'Содержимое атрибута value'
+        //text: 'Чубакка',
+        //value: '1'
       }
-    */
-    return [
-      {
-        text: 'Чубакка',
-        value: '1'
-      }
-    ];
+    ];*/
   }
 }
 
