@@ -1,19 +1,26 @@
+
 let checks = document.getElementsByClassName("interest__check");
-checks[0].addEventListener("change", () => {
-  if (checks[1].checked === true && checks[2].checked === true) {
-    checks[1].checked = false;
-    checks[2].checked = false;
-  } else {
-    checks[1].checked = true;
-    checks[2].checked = true;
-  }
-});
-checks[3].addEventListener("change", () => {
-    if (checks[4].checked === true && checks[5].checked === true) {
-      checks[4].checked = false;
-      checks[5].checked = false;
-    } else {
-      checks[4].checked = true;
-      checks[5].checked = true;
-    }
+console.log(checks);
+
+for (let i = 0; i < checks.length; i++) {
+  checks[i].addEventListener("change", () => {
+    changeCheck(checks[i]);
   });
+}
+
+function changeCheck(check) {
+  let nestedElems = check.parentElement.nextElementSibling.getElementsByClassName(
+    "interest__check"
+  );
+  if (check.parentElement.nextElementSibling.matches("ul.interests") && check.checked) {
+    for (let i = 0; i < nestedElems.length; i++) {
+      nestedElems[i].checked = true;
+    }
+  } else {
+    for (let i = 0; i < nestedElems.length; i++) {
+      nestedElems[i].checked = false;
+    }
+  }
+}
+
+//closest("ul.interests")
