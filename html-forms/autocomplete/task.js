@@ -67,9 +67,9 @@ class Autocomplete {
     this.list.innerHTML = html.join('');
   }
 print() {
-  console.log("print")
+  //console.log("print")
 }
-  getMatches( text ) {
+  getMatches( text ) { // Доработать
     let arrOption = [];
     for(let i of this.input.options) {
       if(i.textContent.includes(text)) {
