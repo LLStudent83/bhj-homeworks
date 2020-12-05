@@ -1,4 +1,4 @@
-let checks = document.getElementsByClassName("interest__check");
+/*let checks = document.getElementsByClassName("interest__check");
 
 for (let i = 0; i < checks.length; i++) {
   checks[i].addEventListener("change", () => {
@@ -70,5 +70,43 @@ function changeCheckUpp(check) {
       ).indeterminate = false;
   }
 }
+*/
+const allInterests = document.querySelectorAll('.interest__check')
 
+function checkLists (event) {
+	let target = event.target;
+	let childLi = target.closest('li').querySelectorAll('ul li');
 
+	if (childLi.length > 0) {
+		for (let j = 0; j < childLi.length; j++) {
+			childLi[j].querySelector('input').checked = target.checked;
+		}
+	}
+
+	upListChecked(target);
+}
+
+function upListChecked(target) {
+	let parentUlChild = target.closest('ul');
+	let childInput = parentUlChild.querySelectorAll('input');
+	let parentLiUl = parentUlChild.closest('li');
+
+	if (parentLiUl) {
+		parentLiUl = parentLiUl.querySelector('input');
+		let array = [];
+
+		for (let i = 0; i < childInput.length; i++) {
+			array.push(childInput[i].checked);
+		}
+
+		parentLiUl.checked = array.every(Boolean);
+		parentLiUl.indeterminate = !array.every(Boolean) && array.some(Boolean);
+
+		upListChecked(parentLiUl);
+	}
+
+}
+
+allInterests.forEach(node => {
+  node.addEventListener('click', checkLists) 
+});
