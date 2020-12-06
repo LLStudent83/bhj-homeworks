@@ -24,6 +24,7 @@ function addTask() {
     "click",
     () => element.remove()
   );
+  event.preventDefault();
 }
 
 document.getElementById("tasks__add").addEventListener("click", addTask);

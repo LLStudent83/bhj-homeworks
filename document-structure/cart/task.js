@@ -5,9 +5,8 @@ let quantityProducts = document.getElementsByClassName(
 for (let i = 0; i < quantityProducts.length; i++) {
   quantityProducts[i].previousElementSibling.addEventListener("click", () => {
     quantityProducts[i].textContent--;
-    if (quantityProducts[i].textContent < 0) {
-      alert("Уважаемый покупатель меньше ноля быть не может");
-      quantityProducts[i].textContent = 0;
+    if (quantityProducts[i].textContent < 1) {
+      quantityProducts[i].textContent = 1;
     }
   });
   quantityProducts[i].nextElementSibling.addEventListener("click", () => {
