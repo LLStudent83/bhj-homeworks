@@ -1,53 +1,40 @@
 let tooltips = Array.from(document.getElementsByClassName("has-tooltip"));
+let elementPrompt = document.createElement("div");
+
+elementPrompt.classList.add("tooltip");
+tooltips[0].insertAdjacentElement("afterend", elementPrompt);
+
 for (let i = 0; i < tooltips.length; i++) {
   tooltips[i].addEventListener("click", () => {
-    if (
-        document.querySelector(".tooltip_active") &&
-        tooltips[i].nextElementSibling.classList.contains("tooltip_active") 
+    event.preventDefault();
+
+    if (document.querySelector(".tooltip_active")) {
+      if (
+        tooltips[i].getAttribute("title") ===
+        document.querySelector(".tooltip_active").textContent
       ) {
         document
           .querySelector(".tooltip_active")
           .classList.remove("tooltip_active");
-          event.preventDefault();
-          return
-      }
-    if (!document.querySelector(".tooltip_active")) {
-      if (tooltips[i].nextElementSibling.classList.contains("tooltip")) {
-        tooltips[i].nextElementSibling.classList.add("tooltip_active");
+        return;
       } else {
         addElement(tooltips[i]);
       }
     } else {
-      if (
-        document.querySelector(".tooltip_active") &&
-        !tooltips[i].nextElementSibling.classList.contains("tooltip_active")
-      ) {
-        document
-          .querySelector(".tooltip_active")
-          .classList.remove("tooltip_active");
-
-        if (tooltips[i].nextElementSibling.classList.contains("tooltip")) {
-          tooltips[i].nextElementSibling.classList.add("tooltip_active");
-        } else {
-          addElement(tooltips[i]);
-        }
-      }
-      
-      
-    }
-    event.preventDefault();
+      addElement(tooltips[i]);
+      document.querySelector(".tooltip").classList.add("tooltip_active");
+    };
   });
-}
+};
 
 function addElement(element) {
-  let elementPrompt = document.createElement("div");
-  elementPrompt.classList.add("tooltip");
-  elementPrompt.classList.add("tooltip_active");
-  elementPrompt.textContent = element.getAttribute("title");
-  let position = element.getBoundingClientRect();
+    let position = element.getBoundingClientRect();
+
   elementPrompt.setAttribute(
     "style",
     `left: ${position.left}px; top: ${position.top + 20}px`
   );
+  elementPrompt.textContent = element.getAttribute("title");
   element.insertAdjacentElement("afterend", elementPrompt);
-}
+  event.preventDefault();
+};

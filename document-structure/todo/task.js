@@ -1,6 +1,7 @@
 let arrTasks = [];
 
 function addTask() {
+  event.preventDefault();
   let inputText = document.getElementById("task__input").value;
   if (inputText == "") {
     alert("Ты забыл написать задание");
@@ -24,7 +25,6 @@ function addTask() {
     "click",
     () => element.remove()
   );
-  event.preventDefault();
 }
 
 document.getElementById("tasks__add").addEventListener("click", addTask);
